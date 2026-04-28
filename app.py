@@ -670,27 +670,27 @@ with tab3:
     )
 
     df_sector_country_year = df_sectors[
-    (df_sectors["country"] == sector_country) &
-    (df_sectors["year"] == sector_year)
-].copy()
-
-if not include_other_sector:
-    df_sector_country_year = df_sector_country_year[
-        df_sector_country_year["sector"] != "Other"
+        (df_sectors["country"] == sector_country) &
+        (df_sectors["year"] == sector_year)
     ].copy()
 
-# Apply the selected sector filter to the sector breakdown chart
-if selected_sectors:
-    df_sector_country_year = df_sector_country_year[
-        df_sector_country_year["sector"].isin(selected_sectors)
-    ].copy()
-else:
-    st.warning("Please select at least one sector to display the sector breakdown.")
+    if not include_other_sector:
+        df_sector_country_year = df_sector_country_year[
+            df_sector_country_year["sector"] != "Other"
+        ].copy()
 
-df_sector_country_year = df_sector_country_year.sort_values(
-    "emissions_mt",
-    ascending=False
-)
+    # Apply selected sector filter to the sector breakdown chart
+    if selected_sectors:
+        df_sector_country_year = df_sector_country_year[
+            df_sector_country_year["sector"].isin(selected_sectors)
+        ].copy()
+    else:
+        st.warning("Please select at least one sector to display the sector breakdown.")
+
+    df_sector_country_year = df_sector_country_year.sort_values(
+        "emissions_mt",
+        ascending=False
+    )
 
     st.subheader(f"Sector Breakdown for {sector_country} in {sector_year}")
 
@@ -724,8 +724,6 @@ df_sector_country_year = df_sector_country_year.sort_values(
     )
 
     st.divider()
-
-    st.subheader(f"Sector Emissions Trend for {sector_country}")
 
     if not selected_sectors:
         st.warning("Please select at least one sector.")
