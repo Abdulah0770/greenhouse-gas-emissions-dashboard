@@ -860,14 +860,6 @@ with tab4:
         key="gas_year_range"
     )
 
-    gas_start_year, gas_end_year = gas_year_range
-
-    selected_gas_ranking_year = st.selectbox(
-        "Select year for gas country ranking",
-        options=available_years,
-        index=len(available_years) - 1,
-        key="gas_ranking_year"
-    )
 
     if not selected_gas_countries:
         st.warning("Please select at least one country for the gas trend chart.")
@@ -905,8 +897,14 @@ with tab4:
 
     st.divider()
 
-    st.subheader(f"Top Countries for {selected_gas} in {selected_gas_ranking_year}")
+    selected_gas_ranking_year = st.selectbox(
+        "Select year for gas country ranking",
+        options=available_years,
+        index=len(available_years) - 1,
+        key="gas_ranking_year"
+    )
 
+    st.subheader(f"Top Countries for {selected_gas} in {selected_gas_ranking_year}")
     df_gas_ranking = df_gases[
         (df_gases["gas"] == selected_gas) &
         (df_gases["year"] == selected_gas_ranking_year)
