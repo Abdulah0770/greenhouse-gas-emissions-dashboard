@@ -859,7 +859,7 @@ with tab4:
         step=1,
         key="gas_year_range"
     )
-        gas_start_year, gas_end_year = gas_year_range
+    gas_start_year, gas_end_year = gas_year_range
 
 
     if not selected_gas_countries:
